@@ -1,0 +1,26 @@
+<style>
+  .pointer {
+    cursor: pointer;
+  }
+</style>
+
+<div>
+  <ul>
+    <li>như nào</li>
+    <li>làm sao</li>
+    <li>thế nào</li>
+    <li>muốn gì</li>
+    <div>{{ title }}</div>
+    <input [type]="inputType" [(ngModel)]="title" />
+    <div class="pointer" (click)="incrementAge()">+</div>
+    <div>{{ user.age }}</div>
+    <div class="pointer" (click)="decrementAge()">-</div>
+
+    <span *ngIf="user.age > 18; else under18">onInit</span>
+    <ng-template #under18>
+      <span>Under 18</span>
+    </ng-template>
+  </ul>
+  <div *ngFor="let u of users">{{u.email}} - {{u.name}} - {{u.phone}}</div>
+</div>
+<router-outlet />
