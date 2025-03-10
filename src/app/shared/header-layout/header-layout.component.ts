@@ -11,6 +11,8 @@ import { RouterOutlet } from '@angular/router';
 })
 export class HeaderLayoutComponent {
   title = '1000s';
+  isWarning = false;
+  isbgColor = false
   inputType = 'text';
   user = { 
     age: 10,
@@ -49,4 +51,5 @@ export class HeaderLayoutComponent {
       email:'admin5555@gmail.com'
     }
   ]
+  tags:string[] = ["typeScrip", "react-js","angular"]
 }
