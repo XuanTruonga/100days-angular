@@ -1,0 +1,7 @@
+<p>author-detaild.component works!</p>
+<div >
+  <div *ngFor="let user of author">{{ user.name }}
+    <button style="margin-left: 1rem" (click)="logEvent(user)">Select</button>
+  </div>
+</div>
+<div>các bạn sao: {{currentAuthor?.name}}</div>

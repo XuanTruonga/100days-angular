@@ -27,7 +27,7 @@
       <span>Under 18</span>
     </ng-template>
   </ul>
- <ng-container *ngIf="users.length > 0 ; else noUsers">
+  <ng-container *ngIf="users.length > 0; else noUsers">
     <div
       *ngFor="
         let u of users;
@@ -39,35 +39,43 @@
         odd as isOdd
       "
     >
-  
       <span *ngIf="isFirst">
         <span>Phần tử đầu tiên</span>
       </span>
-  
+
       <span *ngIf="isLast">
         <span>Phần tử cuối cùng</span>
       </span>
-  
+
       <span *ngIf="isEven">
         <span>Phần tử chẵn</span>
       </span>
-    
+
       <span *ngIf="isOdd">
         <span>Phần tử lẻ</span>
       </span>
-  
+
       <span>Vị trí index: {{ index }}</span>
-  
+
       <span>Độ dài mảng: {{ count }}</span>
     </div>
- </ng-container>
- <ng-template #noUsers>No user 11 </ng-template>
-  <button [class.right-margin]="!isLast" *ngFor="let tag of tags; last as isLast">
-    {{tag}} 
+  </ng-container>
+  <ng-template #noUsers>No user 11 </ng-template>
+  <button
+    [class.right-margin]="!isLast"
+    *ngFor="let tag of tags; last as isLast"
+  >
+    {{ tag }}
   </button>
   <button (click)="isWarning = !isWarning">warning</button>
   <button (click)="isbgColor = !isbgColor">bg-color</button>
   <!-- <div [class.red] = "isWarning" [class.bg] = "isbgColor" style="width: 25px; height: 25px;">desadsa</div> -->
-  <div [class]="{'red': isWarning,'bg':isbgColor}">desadsa</div>
+  <div [class]="{ red: isWarning, bg: isbgColor }">1da23</div>
 </div>
+<app-progress-bar-component [progress]="60"></app-progress-bar-component>
+<app-author-list></app-author-list>
+<app-author-detaild [author]="authors" (select)="onSelected($event)"></app-author-detaild>
+
+<button>{{currAuthor.name}}</button>
+
 <router-outlet />

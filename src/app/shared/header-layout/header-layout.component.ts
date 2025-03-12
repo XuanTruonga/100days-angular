@@ -1,11 +1,16 @@
+import { authors } from './../../contants';
 import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { NgForm, FormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
+import { ProgressBarComponentComponent } from "../../progress-bar-component/progress-bar-component.component";
+import { AuthorListComponentComponent } from '../../author/author-list.component/author-list.component.component';
+import { AuthorDetaildComponentComponent } from '../../author/author-detaild.component/author-detaild.component.component';
 
 @Component({
   selector: 'header-layout',
-  imports: [FormsModule,NgIf,NgFor,RouterOutlet],
+  standalone: true,
+  imports: [FormsModule, NgIf, NgFor, RouterOutlet, ProgressBarComponentComponent,AuthorListComponentComponent,AuthorDetaildComponentComponent],
   templateUrl: './header-layout.component.html',
   styleUrl: './header-layout.component.css',
 })
@@ -14,8 +19,10 @@ export class HeaderLayoutComponent {
   isWarning = false;
   isbgColor = false
   inputType = 'text';
+  authors = authors
+  currAuthor = authors[0]
   user = { 
-    age: 10,
+    age: 10,                    
   }
   incrementAge() {
     this.user = {...this.user, age: this.user.age + 1 };
@@ -23,7 +30,7 @@ export class HeaderLayoutComponent {
   
   decrementAge() {
     this.user = {...this.user, age: this.user.age - 1 };
-  }
+  }     
   users = [
     {
       name:'user1',
@@ -51,5 +58,9 @@ export class HeaderLayoutComponent {
       email:'admin5555@gmail.com'
     }
   ]
+  onSelected(user: any){
+    console.log(1);
+    this.currAuthor = user
+  }
   tags:string[] = ["typeScrip", "react-js","angular"]
 }
