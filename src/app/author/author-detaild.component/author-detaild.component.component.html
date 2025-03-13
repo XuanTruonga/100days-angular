@@ -1,7 +1,22 @@
+<style>
+  .class {
+    background-color: red;
+    width: fit-content;
+    height: 20px;
+  }
+</style>
+
 <p>author-detaild.component works!</p>
 <div >
   <div *ngFor="let user of author">{{ user.name }}
-    <button style="margin-left: 1rem" (click)="logEvent(user)">Select</button>
+    <button style="margin-left: 1rem" (click)="logEvent(user)">Select1</button>
+    <button style="margin-left: 1rem" (click)="delete.emit(user)">X</button>
   </div>
+
+  <!-- <div [class]="toggle ? 'class' : ''" (click)="toggle = !toggle">0000</div>
+  <div [ngClass]="{ 'class': toggle }" (click)="toggle = !toggle">0000</div>
+  <div [class]="{ 'class': toggle}" (click)="toggle = !toggle">1da23</div>
+  <div [class.class]="toggle" (click)="toggle = !toggle">0000</div> -->
+  <div [class.class]="checked" (click)="toggleChecked.emit()">checked</div>
 </div>
-<div>các bạn sao: {{currentAuthor?.name}}</div>
+<div>các bạn sao: {{currentAuthor?.name}}</div> 

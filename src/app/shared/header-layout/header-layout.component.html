@@ -74,8 +74,16 @@
 </div>
 <app-progress-bar-component [progress]="60"></app-progress-bar-component>
 <app-author-list></app-author-list>
-<app-author-detaild [author]="authors" (select)="onSelected($event)"></app-author-detaild>
-
-<button>{{currAuthor.name}}</button>
+<app-author-detaild
+  [author]="authors"
+  [checked]="checked"
+  (delete)="onDelete($event)"
+  (select)="onSelected($event)"
+  (toggleChecked)="onChecked()"
+  #toggle
+></app-author-detaild>
+<button (click)="toggle.logClick()">Toogle</button>
+<button (click)="callChildMedthod()">sayhelo</button>
+<button>{{ currAuthor.name }}</button>
 
 <router-outlet />
