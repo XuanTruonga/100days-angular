@@ -1,0 +1,29 @@
+<div class="login">
+  <h2>Login</h2>
+
+  <form (ngSubmit)="submit()" #f="ngForm">
+    <input
+      name="username"
+      [(ngModel)]="username"
+      placeholder="Username"
+      required
+    />
+
+    <input
+      name="password"
+      [(ngModel)]="password"
+      type="password"
+      placeholder="Password"
+      required
+    />
+
+    <button
+      nz-button
+      nzType="primary"
+      type="submit"
+      [disabled]="loading"
+    >
+      {{ loading ? 'Logging...' : 'Login' }}
+    </button>
+  </form>
+</div>

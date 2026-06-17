@@ -1,0 +1,16 @@
+<nz-form-item *ngIf="control">
+  <nz-form-label [nzRequired]="required">
+    {{ label }}
+  </nz-form-label>
+
+  <nz-form-control [nzValidateStatus]="control" [nzErrorTip]="errorMessage">
+    <input
+      nz-input
+      [formControl]="control"
+      [type]="type"
+      [placeholder]="placeholder"
+      [autofocus]="autoFocus"
+      [class]="className"
+    />
+  </nz-form-control>
+</nz-form-item>

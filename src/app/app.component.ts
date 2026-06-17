@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderLayoutComponent } from './shared/header-layout/header-layout.component';
-import { FormsModule, NgModel } from '@angular/forms';
-import { AuthorListComponentComponent } from './author/author-list.component/author-list.component.component';
+import { FormsModule } from '@angular/forms';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @Component({
+  standalone: true,
   selector: 'app-root',
-  imports: [RouterOutlet,HeaderLayoutComponent,FormsModule,AuthorListComponentComponent],
+  imports: [RouterOutlet, FormsModule, NzButtonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = '100s-day-angular';
