@@ -22,7 +22,7 @@ export class ZSelectComponent {
 
   @Input() allowClear = true;
 
-  @Input() options: ZSelectOption[] = [];
+  @Input({ required: true }) options: ZSelectOption[] = [];
 
   @Input() labelKey = 'label';
   @Input() valueKey = 'value';

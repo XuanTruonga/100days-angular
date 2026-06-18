@@ -9,6 +9,9 @@ import { ValidatorsEx } from './shared/form/validators';
 import { ZDatePickerComponent } from './shared/form/controls/z-date-picker/z-date-picker.component';
 import { ZRangePickerComponent } from './shared/form/controls/z-range-picker/z-range-picker.component';
 import { ZSelectComponent } from './shared/form/controls/z-select/z-select.component';
+import { ZTextAreaComponent } from './shared/form/controls/z-text-area/z-text-area.component';
+import { ZCheckboxComponent } from './shared/form/controls/z-checkbox/z-checkbox.component';
+import { ZRadioComponent } from './shared/form/controls/z-radio/z-radio.component';
 
 @Component({
   standalone: true,
@@ -21,6 +24,9 @@ import { ZSelectComponent } from './shared/form/controls/z-select/z-select.compo
     ZDatePickerComponent,
     ZRangePickerComponent,
     ZSelectComponent,
+    ZTextAreaComponent,
+    ZCheckboxComponent,
+    ZRadioComponent,
   ],
   template: `
     <div class="home">
@@ -47,41 +53,6 @@ import { ZSelectComponent } from './shared/form/controls/z-select/z-select.compo
           type="password"
         />
 
-        <app-z-input
-          label="Integer"
-          placeholder="VD: -1, 0, 123"
-          [required]="true"
-          [control]="validateForm.controls.age"
-        />
-
-        <app-z-input
-          label="Positive Integer > 0"
-          placeholder="VD: 1, 2, 100"
-          [required]="true"
-          [control]="validateForm.controls.quantity"
-        />
-
-        <app-z-input
-          label="Positive Integer > 10"
-          placeholder="VD: 11, 12, 100"
-          [required]="true"
-          [control]="validateForm.controls.quantityGt10"
-        />
-
-        <app-z-input
-          label="Decimal"
-          placeholder="VD: -1.5, 0, 1.25"
-          [required]="true"
-          [control]="validateForm.controls.price"
-        />
-
-        <app-z-input
-          label="Positive Decimal > 0"
-          placeholder="VD: 0.5, 1, 99.9"
-          [required]="true"
-          [control]="validateForm.controls.positivePrice"
-        />
-
         <app-z-date-picker
           label="Date Picker"
           placeholder="VD: 100.1, 150, 999.99"
@@ -99,6 +70,27 @@ import { ZSelectComponent } from './shared/form/controls/z-select/z-select.compo
           label="Select"
           [required]="true"
           [control]="validateForm.controls.select"
+          [options]="[
+            { label: 'Option 1', value: 1 },
+            { label: 'Option 2', value: 2 },
+          ]"
+        />
+
+        <app-z-text-area
+          [control]="validateForm.controls.textArea"
+          [required]="true"
+          [rows]="5"
+        />
+
+        <app-z-checkbox
+          [control]="validateForm.controls.checkbox"
+          label="Đồng ý điều khoản"
+        />
+
+        <app-z-radio
+          [control]="validateForm.controls.radio"
+          [required]="true"
+          label="Chọn"
           [options]="[
             { label: 'Option 1', value: 1 },
             { label: 'Option 2', value: 2 },
@@ -168,6 +160,12 @@ export class HomeComponent {
     rangePicker: this.fb.control(null, [ValidatorsEx.required]),
 
     select: this.fb.control(null, [ValidatorsEx.required]),
+
+    textArea: this.fb.control('', [ValidatorsEx.required]),
+
+    checkbox: this.fb.control(false, [ValidatorsEx.required]),
+
+    radio: this.fb.control<number | null>(null, [ValidatorsEx.required]),
   });
 
   submitForm(): void {

@@ -1,0 +1,22 @@
+<nz-form-item>
+  <nz-form-label [nzRequired]="required">
+    <ng-content select="[label]"></ng-content>
+
+    <ng-container *ngIf="label">
+      {{ label }}
+    </ng-container>
+  </nz-form-label>
+
+  <nz-form-control [nzValidateStatus]="control" [nzErrorTip]="errorMessage">
+    <nz-radio-group [formControl]="control" [class]="className">
+      <label
+        nz-radio
+        *ngFor="let option of options"
+        [nzValue]="option.value"
+        [nzDisabled]="option.disabled"
+      >
+        {{ option.label }}
+      </label>
+    </nz-radio-group>
+  </nz-form-control>
+</nz-form-item>
