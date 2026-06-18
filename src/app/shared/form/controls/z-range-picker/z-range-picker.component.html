@@ -1,16 +1,18 @@
-<nz-form-item *ngIf="control">
+<nz-form-item>
   <nz-form-label [nzRequired]="required">
-    {{ label }}
+    <ng-content select="[label]"></ng-content>
+
+    <ng-container *ngIf="label">
+      {{ label }}
+    </ng-container>
   </nz-form-label>
 
   <nz-form-control [nzValidateStatus]="control" [nzErrorTip]="errorMessage">
-    <input
-      nz-input
+    <nz-range-picker
+      [nzShowTime]="showTime"
       [formControl]="control"
-      [type]="type"
-      [placeholder]="placeholder"
-      [autofocus]="autoFocus"
       [class]="className"
+      [nzPlaceHolder]="placeholder"
     />
   </nz-form-control>
 </nz-form-item>

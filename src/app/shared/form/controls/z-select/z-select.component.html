@@ -1,0 +1,25 @@
+<nz-form-item>
+  <nz-form-label [nzRequired]="required">
+    <ng-content select="[label]"></ng-content>
+
+    <ng-container *ngIf="label">
+      {{ label }}
+    </ng-container>
+  </nz-form-label>
+
+  <nz-form-control [nzValidateStatus]="control" [nzErrorTip]="errorMessage">
+    <nz-select
+      [formControl]="control"
+      [nzPlaceHolder]="placeholder"
+      [class]="className"
+      [nzAllowClear]="allowClear"
+    >
+      <nz-option
+        *ngFor="let option of options"
+        [nzValue]="getOptionValue(option)"
+        [nzLabel]="getOptionLabel(option)"
+        [nzDisabled]="getOptionDisabled(option)"
+      />
+    </nz-select>
+  </nz-form-control>
+</nz-form-item>

@@ -7,6 +7,7 @@ import {
   provideClientHydration,
   withEventReplay,
 } from '@angular/platform-browser';
+import { provideNzI18n, vi_VN } from 'ng-zorro-antd/i18n';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,5 +15,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimations(),
     provideClientHydration(withEventReplay()),
+    provideNzI18n(vi_VN),
   ],
 };

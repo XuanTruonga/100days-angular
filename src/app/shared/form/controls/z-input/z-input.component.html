@@ -1,0 +1,20 @@
+<nz-form-item>
+  <nz-form-label [nzRequired]="required">
+    <ng-content select="[label]"></ng-content>
+
+    <ng-container *ngIf="label">
+      {{ label }}
+    </ng-container>
+  </nz-form-label>
+
+  <nz-form-control [nzValidateStatus]="control" [nzErrorTip]="errorMessage">
+    <input
+      #inputRef
+      nz-input
+      [formControl]="control"
+      [type]="type"
+      [placeholder]="placeholder"
+      [class]="className"
+    />
+  </nz-form-control>
+</nz-form-item>
