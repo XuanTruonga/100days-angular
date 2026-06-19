@@ -1,0 +1,72 @@
+    <div class="home">
+      <h2>Home</h2>
+      <form
+        nz-form
+        [formGroup]="validateForm"
+        class="login-form"
+        (ngSubmit)="submitForm()"
+      >
+        <app-z-input
+          label="Username"
+          placeholder="Enter your username"
+          [autoFocus]="true"
+          [required]="true"
+          [control]="validateForm.controls.username"
+        />
+
+        <app-z-input
+          label="Password"
+          placeholder="Enter your password"
+          [required]="true"
+          [control]="validateForm.controls.password"
+          type="password"
+        />
+
+        <app-z-date-picker
+          label="Date Picker"
+          placeholder="VD: 100.1, 150, 999.99"
+          [required]="true"
+          [control]="validateForm.controls.positivePriceGt100"
+        />
+
+        <app-z-range-picker
+          label="Range Picker"
+          [required]="true"
+          [control]="validateForm.controls.rangePicker"
+        />
+
+        <app-z-select
+          label="Select"
+          [required]="true"
+          [control]="validateForm.controls.select"
+          [options]="[
+            { label: 'Option 1', value: 1 },
+            { label: 'Option 2', value: 2 },
+          ]"
+        />
+
+        <app-z-text-area
+          [control]="validateForm.controls.textArea"
+          [required]="true"
+          [rows]="5"
+        />
+
+        <app-z-checkbox
+          [control]="validateForm.controls.checkbox"
+          label="Đồng ý điều khoản"
+        />
+
+        <app-z-radio
+          [control]="validateForm.controls.radio"
+          [required]="true"
+          label="Chọn"
+          [options]="[
+            { label: 'Option 1', value: 1 },
+            { label: 'Option 2', value: 2 },
+          ]"
+        />
+
+        <button nz-button nzType="primary" type="submit">Log in</button>
+      </form>
+      <button nz-button nzType="primary" (click)="logout()">Logout</button>
+    </div>
