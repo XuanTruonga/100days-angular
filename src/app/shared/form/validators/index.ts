@@ -1,9 +1,9 @@
 import { ValidatorFn, Validators } from '@angular/forms';
 
-import { decimalValidator } from './decimal.validator';
+import { decimalValidator } from './number.validator';
 import { integerValidator } from './integer.validator';
 import { vietnamPhoneValidator } from './phone.validator';
-import { positiveDecimalValidator } from './positive.decimal.validator';
+import { positiveDecimalValidator } from './positive.number.validator';
 import { positiveIntegerValidator } from './positive.integer.validator';
 
 export class ValidatorsEx extends Validators {

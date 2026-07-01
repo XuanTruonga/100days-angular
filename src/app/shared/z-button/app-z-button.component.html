@@ -1,0 +1,27 @@
+<button
+  [attr.title]="null"
+  nz-button
+  [attr.type]="htmlType"
+  [nzLoading]="loading"
+  [disabled]="disabled"
+  [ngClass]="buttonClass"
+  nz-tooltip
+  [nzTooltipTitle]="!disabled && tooltip || null"
+  [nzTooltipPlacement]="placement"
+  (click)="onClick($event)"
+  class="button-tooltip-wrapper"
+>
+  <ng-container *ngIf="icon && iconPosition === 'start'">
+    <span class="button-icon" nz-icon [nzType]="icon"></span>
+  </ng-container>
+
+  <span *ngIf="label" class="button-title">
+    {{ label }}
+  </span>
+
+  <ng-content></ng-content>
+
+  <ng-container *ngIf="icon && iconPosition === 'end'">
+    <span class="button-icon" nz-icon [nzType]="icon"></span>
+  </ng-container>
+</button>

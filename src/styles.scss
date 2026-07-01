@@ -1,0 +1,80 @@
+@import "@angular/cdk/overlay-prebuilt.css";
+@import "ng-zorro-antd/ng-zorro-antd.min.css";
+
+.app-modal {
+  .ant-modal-content{
+    top: -30px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .ant-modal-body {
+    padding: 0 0 10px 0 !important;
+  }
+  .ant-modal-title{
+    font-weight: 700 !important;
+    font-size: 18px !important;
+  }
+}
+
+.ant-input {
+  border-radius: 4px;
+  height: 36px;
+}
+
+:root {
+  --app-text-color: #292e35;
+  --app-border-color: #bfbfbf;
+  --app-placeholder-color: #a4acb5;
+  --app-font-family: 'Inter', sans-serif;
+}
+
+body {
+  color: var(--app-text-color);
+}
+
+.ant-input,
+.ant-select-selector,
+.ant-picker {
+  color: var(--app-text-color);
+  border-color: var(--app-border-color);
+}
+
+.ant-input::placeholder {
+  color: var(--app-placeholder-color);
+}
+
+.ant-form-item-label > label {
+  color: var(--app-text-color);
+  font-weight: 500;
+}
+.ant-form-item {
+  margin-bottom: 12px !important;
+}
+
+.ant-form-item-has-error {
+  margin-bottom: 0 !important;
+}
+
+.required-mark {
+  color: #ff4d4f;
+  margin-left: 4px;
+}
+.ant-picker {
+  height: 36px;
+}
+.ant-select {
+  height: 36px !important;
+}
+.ant-select-selector{
+  height: 36px !important;
+  align-items: center;
+}
+:host {
+  display: contents;
+}
+@media (min-width: 1200px) {
+  .ant-col-xl-4\.8 {
+    flex: 0 0 20% ;
+    max-width: 20% ;
+  }
+}

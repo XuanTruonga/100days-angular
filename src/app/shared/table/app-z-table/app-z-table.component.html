@@ -1,0 +1,36 @@
+<nz-table
+  #table
+  [nzData]="data"
+  [nzPageSize]="pageSize"
+  [nzShowSizeChanger]="showSizeChanger"
+  (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
+>
+  <thead>
+    <tr>
+      <th
+        *ngIf="showSelection"
+        [(nzChecked)]="checked"
+        [nzIndeterminate]="indeterminate"
+        (nzCheckedChange)="onAllChecked($event)"
+      ></th>
+
+      <th *ngFor="let column of columns" [style.width]="column.width">
+        {{ column.title }}
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let row of table.data; trackBy: trackByRow">
+      <td
+        *ngIf="showSelection"
+        [nzChecked]="checkedIds.has(getRowId(row))"
+        (nzCheckedChange)="onItemChecked(row, $event)"
+      ></td>
+
+      <td *ngFor="let column of columns">
+        {{ row[column.key] }}
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

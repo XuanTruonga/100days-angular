@@ -1,0 +1,24 @@
+.app-modal-footer{
+  position: absolute;
+    bottom: 0;
+    border-top: 1px solid #f0f0f0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    height: 60px;
+}
+
+.app-modal-body{
+  padding: 8px 28px;
+}
+
+.app-modal-layout{
+    max-height: calc(100vh - 200px - 68px);
+    overflow-y: auto;
+    margin-bottom: 54px;
+    margin-top: 4px;
+}

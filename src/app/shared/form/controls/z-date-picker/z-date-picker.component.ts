@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
-import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { ILayoutForm, ILayoutKey } from '../../../../types/form.ant.types';
+import { DEFAULT_GUTTER } from '../../contants';
 import { getControlErrorMessage } from '../../utils/getErrorMessage';
-import { NzButtonModule } from 'ng-zorro-antd/button';
+import { getGutterStyle } from '../../utils/getGutterStyle';
+import { resolveLayout } from '../../utils/getResolveLayout';
 
 @Component({
   selector: 'app-z-date-picker',
@@ -20,14 +22,25 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
   ],
 })
 export class ZDatePickerComponent {
-  @Input() label: string = '';
-  @Input() required: boolean = false;
-  @Input() placeholder: string = '';
-  @Input() className: string = '';
-  @Input() showTime: boolean = false;
-  @Input({ required: true }) control!: FormControl<Date | null>;
+  label = input('');
+  required = input(false);
+  placeholder = input('');
+  className = input('');
+  showTime = input(false);
+
+  control = input.required<FormControl<Date | null>>();
+
+  layout = input<ILayoutForm | undefined>();
+  layoutKey = input<ILayoutKey | undefined>();
+  gutter = input<number | [number, number]>(DEFAULT_GUTTER);
+
+  resolvedLayout = computed(() =>
+    resolveLayout(this.layout(), this.layoutKey()),
+  );
+
+  gutterStyle = computed(() => getGutterStyle(this.gutter()));
 
   get errorMessage(): string {
-    return getControlErrorMessage(this.control, this.label);
+    return getControlErrorMessage(this.control(), this.label());
   }
 }

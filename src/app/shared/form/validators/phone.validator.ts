@@ -1,4 +1,5 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { VALIDATION_ERROR_KEYS } from '../contants';
 
 export function vietnamPhoneValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -8,7 +9,7 @@ export function vietnamPhoneValidator(): ValidatorFn {
 
     const isValid = /^0\d{9}$/.test(value);
 
-    return isValid ? null : { phone: true };
+    return isValid ? null : { [VALIDATION_ERROR_KEYS.PHONE]: true };
   };
 }
 

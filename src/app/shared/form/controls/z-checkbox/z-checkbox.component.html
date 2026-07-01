@@ -1,11 +1,25 @@
-<nz-form-item>
-  <nz-form-control [nzValidateStatus]="control" [nzErrorTip]="errorMessage">
-    <label nz-checkbox [formControl]="control">
-      <ng-content></ng-content>
+<div
+  nz-col
+  [nzXs]="resolvedLayout().xs ?? null"
+  [nzSm]="resolvedLayout().sm ?? null"
+  [nzMd]="resolvedLayout().md ?? null"
+  [nzLg]="resolvedLayout().lg ?? null"
+  [nzXl]="resolvedLayout().xl ?? null"
+  [nzSpan]="resolvedLayout().span ?? null"
+  [ngStyle]="gutterStyle()"
+>
+  <nz-form-item>
+    <nz-form-control
+      [nzValidateStatus]="control()"
+      [nzErrorTip]="errorMessage"
+    >
+      <label nz-checkbox [formControl]="control()">
+        <ng-content></ng-content>
 
-      <ng-container *ngIf="label">
-        {{ label }}
-      </ng-container>
-    </label>
-  </nz-form-control>
-</nz-form-item>
+        @if (label()) {
+          {{ label() }}
+        }
+      </label>
+    </nz-form-control>
+  </nz-form-item>
+</div>

@@ -1,0 +1,52 @@
+.action-table-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    opacity 0.2s ease;
+
+  &:hover:not(.action-disabled) {
+    background-color: rgb(0 0 0 / 5%);
+  }
+
+  &:focus-visible {
+    outline: 2px solid #1677ff;
+    outline-offset: 2px;
+  }
+}
+
+.action-edit {
+  color: #f97316;
+}
+
+.action-view {
+  color: #3b82f6;
+}
+
+.action-add {
+  color: #ea580c;
+}
+
+.action-send {
+  color: #22c55e;
+}
+
+.action-delete {
+  color: #ef4444;
+}
+
+.action-disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: auto;
+}

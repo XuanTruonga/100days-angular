@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { ZInputComponent } from '../../../../shared/form/controls/z-input/z-input.component.ts';
 import { ZDatePickerComponent } from '../../../../shared/form/controls/z-date-picker/z-date-picker.component';
 import { ZRangePickerComponent } from '../../../../shared/form/controls/z-range-picker/z-range-picker.component';
 import { ZSelectComponent } from '../../../../shared/form/controls/z-select/z-select.component';
@@ -12,6 +11,7 @@ import { ZCheckboxComponent } from '../../../../shared/form/controls/z-checkbox/
 import { ZRadioComponent } from '../../../../shared/form/controls/z-radio/z-radio.component';
 import { AuthService } from '../../../../auth.service';
 import { ValidatorsEx } from '../../../../shared/form/validators/index';
+import { ZInputComponent } from '../../../../shared/form/controls/z-input/z-input.component';
 
 @Component({
   standalone: true,

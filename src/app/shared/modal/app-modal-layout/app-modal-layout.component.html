@@ -1,0 +1,33 @@
+<div class="app-modal-layout">
+  <div class="app-modal-header">
+    <h3>{{ title }}</h3>
+  </div>
+
+  <div class="app-modal-body">
+    <ng-content></ng-content>
+  </div>
+
+  <div class="app-modal-footer">
+    @if (footerTemplate) {
+      <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
+    } @else {
+      <app-z-button
+        type="cancel_outline"
+        icon="close"
+        [label]="cancelText"
+        (buttonClick)="cancel.emit()"
+        [disabled]="true"
+      />
+
+      <app-z-button
+        [label]="okText"
+        [loading]="loading"
+        icon="save"
+        [disabled]="disabled"
+        (buttonClick)="ok.emit()"
+        [disabled]="true"
+      />
+    }
+
+  </div>
+</div>

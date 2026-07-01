@@ -3,12 +3,18 @@ import {
   afterNextRender,
   Component,
   ElementRef,
-  Input,
-  ViewChild,
+  computed,
+  input,
+  viewChild,
+  effect,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { ILayoutForm, ILayoutKey } from '../../../../types/form.ant.types';
+import { DEFAULT_GUTTER } from '../../contants';
+import { resolveLayout } from '../../utils/getResolveLayout';
+import { getGutterStyle } from '../../utils/getGutterStyle';
 import { getControlErrorMessage } from '../../utils/getErrorMessage';
 
 @Component({
@@ -19,25 +25,36 @@ import { getControlErrorMessage } from '../../utils/getErrorMessage';
   imports: [CommonModule, ReactiveFormsModule, NzFormModule, NzInputModule],
 })
 export class ZTextAreaComponent {
-  @Input() label: string = '';
-  @Input() required: boolean = false;
-  @Input() placeholder: string = '';
-  @Input() autoFocus: boolean = false;
-  @Input() className: string = '';
-  @Input() rows: number = 4;
-  @Input({ required: true }) control!: FormControl<string>;
+  label = input('');
+  required = input(false);
+  placeholder = input('');
+  autoFocus = input(false);
+  className = input('');
+  rows = input(4);
 
-  @ViewChild('textAreaRef') textAreaRef!: ElementRef<HTMLTextAreaElement>;
+  control = input.required<FormControl<string>>();
+
+  layout = input<ILayoutForm | undefined>();
+  layoutKey = input<ILayoutKey | undefined>();
+  gutter = input<number | [number, number]>(DEFAULT_GUTTER);
+
+  textAreaRef = viewChild<ElementRef<HTMLTextAreaElement>>('textAreaRef');
+
+  resolvedLayout = computed(() =>
+    resolveLayout(this.layout(), this.layoutKey()),
+  );
+
+  gutterStyle = computed(() => getGutterStyle(this.gutter()));
+
+  get errorMessage(): string {
+    return getControlErrorMessage(this.control(), this.label());
+  }
 
   constructor() {
     afterNextRender(() => {
-      if (this.autoFocus) {
-        this.textAreaRef?.nativeElement.focus();
+      if (this.autoFocus()) {
+        this.textAreaRef()?.nativeElement.focus();
       }
     });
-  }
-
-  get errorMessage(): string {
-    return getControlErrorMessage(this.control, this.label);
   }
 }

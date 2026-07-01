@@ -9,11 +9,5 @@ export const routes: Routes = [
         (m) => m.LoginComponent,
       ),
   },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
-  },
-  { path: '**', redirectTo: 'home' },
   ...homeRoutes,
 ];

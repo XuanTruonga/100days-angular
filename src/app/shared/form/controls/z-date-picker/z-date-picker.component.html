@@ -1,18 +1,36 @@
-<nz-form-item>
-  <nz-form-label [nzRequired]="required">
-    <ng-content select="[label]"></ng-content>
+<div
+  nz-col
+  [nzXs]="resolvedLayout().xs ?? null"
+  [nzSm]="resolvedLayout().sm ?? null"
+  [nzMd]="resolvedLayout().md ?? null"
+  [nzLg]="resolvedLayout().lg ?? null"
+  [nzXl]="resolvedLayout().xl ?? null"
+  [nzSpan]="resolvedLayout().span ?? null"
+  [ngStyle]="gutterStyle()"
+>
+  <nz-form-item>
+    <nz-form-label>
+      <ng-content select="[label]"></ng-content>
 
-    <ng-container *ngIf="label">
-      {{ label }}
-    </ng-container>
-  </nz-form-label>
+      @if (label()) {
+        {{ label() }}
+      }
 
-  <nz-form-control [nzValidateStatus]="control" [nzErrorTip]="errorMessage">
-    <nz-date-picker
-      [nzShowTime]="showTime"
-      [formControl]="control"
-      [class]="className"
-      [nzPlaceHolder]="placeholder"
-    />
-  </nz-form-control>
-</nz-form-item>
+      @if (required()) {
+        <span class="required-mark"> (*) </span>
+      }
+    </nz-form-label>
+
+    <nz-form-control
+      [nzValidateStatus]="control()"
+      [nzErrorTip]="errorMessage"
+    >
+      <nz-date-picker
+        [formControl]="control()"
+        [nzShowTime]="showTime()"
+        [nzPlaceHolder]="placeholder()"
+        [class]="className()"
+      />
+    </nz-form-control>
+  </nz-form-item>
+</div>

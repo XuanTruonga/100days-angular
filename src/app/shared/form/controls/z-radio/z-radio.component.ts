@@ -1,9 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { ILayoutForm, ILayoutKey } from '../../../../types/form.ant.types';
+import { DEFAULT_GUTTER } from '../../contants';
 import { getControlErrorMessage } from '../../utils/getErrorMessage';
+import { getGutterStyle } from '../../utils/getGutterStyle';
+import { resolveLayout } from '../../utils/getResolveLayout';
 
 export interface ZRadioOption<T = string> {
   label: string;
@@ -19,13 +23,26 @@ export interface ZRadioOption<T = string> {
   imports: [CommonModule, ReactiveFormsModule, NzFormModule, NzRadioModule],
 })
 export class ZRadioComponent<T = string> {
-  @Input() label: string = '';
-  @Input() required: boolean = false;
-  @Input() className: string = '';
-  @Input({ required: true }) options: ZRadioOption<T>[] = [];
-  @Input({ required: true }) control!: FormControl<T>;
+  label = input('');
+  required = input(false);
+  className = input('');
 
-  get errorMessage(): string {
-    return getControlErrorMessage(this.control, this.label);
-  }
+  options = input.required<ZRadioOption<T>[]>();
+  control = input.required<FormControl<T>>();
+
+  layout = input<ILayoutForm | undefined>();
+  layoutKey = input<ILayoutKey | undefined>();
+  gutter = input<number | [number, number]>(DEFAULT_GUTTER);
+
+  resolvedLayout = computed(() =>
+    resolveLayout(this.layout(), this.layoutKey())
+  );
+
+  gutterStyle = computed(() =>
+    getGutterStyle(this.gutter())
+  );
+
+  errorMessage = computed(() =>
+    getControlErrorMessage(this.control(), this.label())
+  );
 }

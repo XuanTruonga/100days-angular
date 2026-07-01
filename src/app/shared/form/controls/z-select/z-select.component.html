@@ -1,25 +1,44 @@
-<nz-form-item>
-  <nz-form-label [nzRequired]="required">
-    <ng-content select="[label]"></ng-content>
+<div
+  nz-col
+  [nzXs]="resolvedLayout().xs ?? null"
+  [nzSm]="resolvedLayout().sm ?? null"
+  [nzMd]="resolvedLayout().md ?? null"
+  [nzLg]="resolvedLayout().lg ?? null"
+  [nzXl]="resolvedLayout().xl ?? null"
+  [nzSpan]="resolvedLayout().span ?? null"
+  [ngStyle]="gutterStyle()"
+>
+  <nz-form-item>
+    <nz-form-label>
+      <ng-content select="[label]"></ng-content>
 
-    <ng-container *ngIf="label">
-      {{ label }}
-    </ng-container>
-  </nz-form-label>
+      @if (label()) {
+        {{ label() }}
+      }
 
-  <nz-form-control [nzValidateStatus]="control" [nzErrorTip]="errorMessage">
-    <nz-select
-      [formControl]="control"
-      [nzPlaceHolder]="placeholder"
-      [class]="className"
-      [nzAllowClear]="allowClear"
+      @if (required()) {
+        <span class="required-mark"> (*) </span>
+      }
+    </nz-form-label>
+
+    <nz-form-control
+      [nzValidateStatus]="control()"
+      [nzErrorTip]="errorMessage"
     >
-      <nz-option
-        *ngFor="let option of options"
-        [nzValue]="getOptionValue(option)"
-        [nzLabel]="getOptionLabel(option)"
-        [nzDisabled]="getOptionDisabled(option)"
-      />
-    </nz-select>
-  </nz-form-control>
-</nz-form-item>
+      <nz-select
+        [formControl]="control()"
+        [nzPlaceHolder]="placeholder()"
+        [class]="className()"
+        [nzAllowClear]="allowClear()"
+      >
+        @for (option of resolvedOptions(); track option.value) {
+          <nz-option
+            [nzValue]="option.value"
+            [nzLabel]="option.label"
+            [nzDisabled]="option.disabled"
+          />
+        }
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+</div>

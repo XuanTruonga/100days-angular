@@ -1,11 +1,22 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { ILayoutForm, ILayoutKey } from '../../../../types/form.ant.types';
+import { DEFAULT_GUTTER } from '../../contants';
 import { getControlErrorMessage } from '../../utils/getErrorMessage';
+import { getGutterStyle } from '../../utils/getGutterStyle';
+import { resolveLayout } from '../../utils/getResolveLayout';
 
 export type ZSelectOption = Record<string, unknown>;
+
+export interface ResolvedZSelectOption {
+  raw: ZSelectOption;
+  label: string;
+  value: unknown;
+  disabled: boolean;
+}
 
 @Component({
   selector: 'app-z-select',
@@ -15,35 +26,40 @@ export type ZSelectOption = Record<string, unknown>;
   imports: [CommonModule, ReactiveFormsModule, NzFormModule, NzSelectModule],
 })
 export class ZSelectComponent {
-  @Input() label = '';
-  @Input() required = false;
-  @Input() placeholder = '';
-  @Input() className = '';
+  label = input('');
+  required = input(false);
+  placeholder = input('');
+  className = input('');
+  allowClear = input(true);
 
-  @Input() allowClear = true;
+  options = input.required<ZSelectOption[]>();
 
-  @Input({ required: true }) options: ZSelectOption[] = [];
+  labelKey = input('label');
+  valueKey = input('value');
+  disabledKey = input('disabled');
 
-  @Input() labelKey = 'label';
-  @Input() valueKey = 'value';
-  @Input() disabledKey = 'disabled';
+  control = input.required<FormControl<unknown>>();
 
-  @Input({ required: true })
-  control!: FormControl<unknown>;
+  layout = input<ILayoutForm | undefined>();
+  layoutKey = input<ILayoutKey | undefined>();
+  gutter = input<number | [number, number]>(DEFAULT_GUTTER);
+
+  resolvedLayout = computed(() =>
+    resolveLayout(this.layout(), this.layoutKey()),
+  );
+
+  gutterStyle = computed(() => getGutterStyle(this.gutter()));
 
   get errorMessage(): string {
-    return getControlErrorMessage(this.control, this.label);
+    return getControlErrorMessage(this.control(), this.label());
   }
 
-  getOptionLabel(option: ZSelectOption): string {
-    return String(option[this.labelKey] ?? '');
-  }
-
-  getOptionValue(option: ZSelectOption): unknown {
-    return option[this.valueKey];
-  }
-
-  getOptionDisabled(option: ZSelectOption): boolean {
-    return Boolean(option[this.disabledKey]);
-  }
+  resolvedOptions = computed<ResolvedZSelectOption[]>(() =>
+    this.options().map((option) => ({
+      raw: option,
+      label: String(option[this.labelKey()] ?? ''),
+      value: option[this.valueKey()],
+      disabled: Boolean(option[this.disabledKey()]),
+    })),
+  );
 }

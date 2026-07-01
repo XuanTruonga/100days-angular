@@ -1,0 +1,19 @@
+<span
+  nz-tooltip
+  [nzTooltipTitle]="tooltipTitle"
+  [class]="
+    'action-table-icon ' +
+    action.colorClass +
+    ' ' +
+    className
+  "
+  [class.action-disabled]="disabled"
+  [attr.role]="'button'"
+  [attr.tabindex]="disabled ? -1 : 0"
+  [attr.aria-label]="tooltipTitle"
+  [attr.aria-disabled]="disabled"
+  (click)="onClick($event)"
+  (keydown)="onKeydown($event)"
+>
+  <nz-icon [nzType]="action.icon" />
+</span>

@@ -1,22 +1,44 @@
-<nz-form-item>
-  <nz-form-label [nzRequired]="required">
-    <ng-content select="[label]"></ng-content>
+<div
+  nz-col
+  [nzXs]="resolvedLayout().xs ?? null"
+  [nzSm]="resolvedLayout().sm ?? null"
+  [nzMd]="resolvedLayout().md ?? null"
+  [nzLg]="resolvedLayout().lg ?? null"
+  [nzXl]="resolvedLayout().xl ?? null"
+  [nzSpan]="resolvedLayout().span ?? null"
+  [ngStyle]="gutterStyle()"
+>
+  <nz-form-item>
+    <nz-form-label>
+      <ng-content select="[label]"></ng-content>
 
-    <ng-container *ngIf="label">
-      {{ label }}
-    </ng-container>
-  </nz-form-label>
+      @if (label()) {
+        {{ label() }}
+      }
 
-  <nz-form-control [nzValidateStatus]="control" [nzErrorTip]="errorMessage">
-    <nz-radio-group [formControl]="control" [class]="className">
-      <label
-        nz-radio
-        *ngFor="let option of options"
-        [nzValue]="option.value"
-        [nzDisabled]="option.disabled"
+      @if (required()) {
+        <span class="required-mark"> (*) </span>
+      }
+    </nz-form-label>
+
+    <nz-form-control
+      [nzValidateStatus]="control()"
+      [nzErrorTip]="errorMessage()"
+    >
+      <nz-radio-group
+        [formControl]="control()"
+        [class]="className()"
       >
-        {{ option.label }}
-      </label>
-    </nz-radio-group>
-  </nz-form-control>
-</nz-form-item>
+        @for (option of options(); track option.value) {
+          <label
+            nz-radio
+            [nzValue]="option.value"
+            [nzDisabled]="option.disabled ?? false"
+          >
+            {{ option.label }}
+          </label>
+        }
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+</div>

@@ -1,0 +1,19 @@
+:host {
+  display: contents;
+}
+.padding{
+      padding-left: 8px;
+    padding-right: 8px;
+}
+:host ::ng-deep .padding {
+  padding: 16px;
+}
+
+:host .padding {
+  padding: 16px;
+}
+
+.gutter-row{
+    padding-left: 8px;
+    padding-right: 8px;
+}

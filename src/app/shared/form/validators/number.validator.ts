@@ -1,4 +1,5 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { VALIDATION_ERROR_KEYS } from '../contants';
 
 export function decimalValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -8,7 +9,9 @@ export function decimalValidator(): ValidatorFn {
       return null;
     }
 
-    return /^-?\d+(\.\d+)?$/.test(value) ? null : { decimal: true };
+    return /^-?\d+(\.\d+)?$/.test(value)
+      ? null
+      : { [VALIDATION_ERROR_KEYS.NUMBER]: true };
   };
 }
 
